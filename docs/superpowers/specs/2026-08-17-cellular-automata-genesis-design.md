@@ -9,10 +9,8 @@ deterministic collection of cellular-automata art and mints it on-chain as a
 `mip-erc721` collection — paid for with x402-funded credits.
 
 This repo owns no protocol logic. It is a consumer of `@medialane/sdk`, the
-same way any third-party integrator would be. If the CA algorithm or the
-mint flow diverge from what a real external developer could do with public
-docs alone, that's a bug in this repo or a gap in the docs — not a reason to
-reach into backend internals.
+same way any third-party integrator would be — only public API surface,
+nothing else.
 
 ## Non-goals
 
@@ -22,9 +20,8 @@ reach into backend internals.
 - No UI. CLI only.
 - No on-demand/per-mint generation — the set is fixed and pre-generated
   before any credits are spent (see Data flow).
-- No testnet path — Medialane is mainnet-only (existing project convention).
-  Collection size is kept small (default 10, configurable) because this is a
-  product test, not a real drop.
+- No testnet path — Medialane is mainnet-only. Collection size is kept small
+  (default 10, configurable) because this is a product test, not a real drop.
 
 ## Architecture
 
