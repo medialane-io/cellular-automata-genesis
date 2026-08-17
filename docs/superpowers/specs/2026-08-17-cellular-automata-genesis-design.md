@@ -6,9 +6,7 @@ Status: approved (in-chat, 2026-08-17)
 
 A standalone client of Medialane's public `/v1` API that generates a fixed,
 deterministic collection of cellular-automata art and mints it on-chain as a
-`mip-erc721` collection — paid for with x402-funded credits, exercised
-end-to-end as a real integration test of the developer-facing API described
-at `medialane-portal`'s `/developers` page.
+`mip-erc721` collection — paid for with x402-funded credits.
 
 This repo owns no protocol logic. It is a consumer of `@medialane/sdk`, the
 same way any third-party integrator would be. If the CA algorithm or the
