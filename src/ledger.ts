@@ -23,6 +23,7 @@ export interface RunState {
   collection: {
     created: boolean;
     collectionContract?: string;
+    collectionId?: string;
     txHash?: string;
   };
   pieces: PieceState[];
