@@ -9,7 +9,7 @@ afterAll(async () => {
   await rm(runDir(runId), { recursive: true, force: true });
 });
 
-test("generate writes one SVG per piece and a resolvable run ledger", async () => {
+test("generate writes one animated GIF per piece and a resolvable run ledger", async () => {
   const run = await generate(runId, 3, "fixed-salt");
   expect(run.pieces.length).toBe(3);
 
@@ -18,8 +18,9 @@ test("generate writes one SVG per piece and a resolvable run ledger", async () =
 
   for (const piece of loaded.pieces) {
     expect(piece.seed).not.toBe("");
-    const svg = await readFile(piece.imagePath, "utf8");
-    expect(svg.startsWith("<svg")).toBe(true);
+    const bytes = await readFile(piece.imagePath);
+    const header = String.fromCharCode(...bytes.subarray(0, 6));
+    expect(header).toBe("GIF89a");
   }
 });
 

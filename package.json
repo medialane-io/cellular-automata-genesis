@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@medialane/sdk": "^0.85.9",
+    "gifenc": "^1.0.3",
     "starknet": "^10.0.2"
   },
   "devDependencies": {

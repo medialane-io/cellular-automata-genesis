@@ -26,7 +26,7 @@ nothing else.
 ## Architecture
 
 ```
-src/generate/   deterministic CA -> image (SVG) + ERC-721 metadata JSON
+src/generate/   deterministic CA -> animated GIF (all frames) + ERC-721 metadata JSON
 src/upload/     pushes generated output through /v1/metadata (Pinata-backed)
 src/mint/       create-collection + mint intents via @medialane/sdk,
                 local signing with a Starknet account, submits + confirms
@@ -43,12 +43,18 @@ is recorded there so a re-run skips completed steps.
 - `collectionSalt` (random per collection, persisted in `out/<run-id>/run.json`)
   + `tokenIndex` (0..N-1) → seed via `keccak256(salt, index)`.
 - Seed drives a 2D cellular automaton (Conway-style neighbor rule, seeded
-  initial state) over a fixed grid/iteration count, rendered directly to SVG
-  — no image library dependency, deterministic byte-for-byte for a given seed.
+  initial state) over a fixed grid/iteration count. Every intermediate grid is
+  kept (`runAutomatonFrames`), not just the final one.
+- The full sequence of frames is encoded as a single looping animated GIF
+  (`gifenc`, a small pure-JS encoder — no ffmpeg/native deps) — this is the
+  minted `image` itself, not a poster-plus-video-url pair. GIF was chosen
+  after confirming the actual upload endpoint's allowed file types only cover
+  real media (image incl. animated GIF, video, audio, PDF) and reject
+  arbitrary HTML, which rules out a self-contained animation_url page.
 - Metadata JSON follows standard ERC-721 shape (`name`, `description`,
-  `image`, `attributes` — rule params, iteration count, seed as a trait).
+  `image`, `attributes` — grid size, frame count, seed as a trait).
 - Determinism is the correctness property under test: same seed must always
-  produce the same SVG bytes and metadata JSON.
+  produce the same GIF bytes and metadata JSON.
 
 ## Mint flow
 

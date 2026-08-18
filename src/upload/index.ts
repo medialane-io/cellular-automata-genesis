@@ -26,7 +26,7 @@ async function parseUploadResponse(res: Response): Promise<UploadResult> {
 export async function uploadImage(apiUrl: string, apiKey: string, filePath: string): Promise<UploadResult> {
   const bytes = await readFile(filePath);
   const form = new FormData();
-  form.append("file", new Blob([bytes], { type: "image/svg+xml" }), basename(filePath));
+  form.append("file", new Blob([bytes], { type: "image/gif" }), basename(filePath));
   const res = await fetch(apiUrlFor(apiUrl, "/v1/metadata/upload-file"), {
     method: "POST",
     headers: { "x-api-key": apiKey },
