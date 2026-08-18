@@ -19,7 +19,7 @@ test("uploadImage posts multipart form data with the api key header", async () =
     capturedUrl = url;
     capturedHeaders = init.headers as Record<string, string>;
     return new Response(JSON.stringify({ data: { cid: "img-cid", url: "ipfs://img-cid" } }), { status: 201 });
-  }) as typeof fetch;
+  }) as unknown as typeof fetch;
 
   const result = await uploadImage("https://api.example.com", "test-key", filePath);
 
@@ -35,7 +35,7 @@ test("uploadMetadataJson posts the metadata object as JSON", async () => {
   globalThis.fetch = (async (_url: string, init: RequestInit) => {
     capturedBody = init.body as string;
     return new Response(JSON.stringify({ data: { cid: "meta-cid", url: "ipfs://meta-cid" } }), { status: 201 });
-  }) as typeof fetch;
+  }) as unknown as typeof fetch;
 
   const result = await uploadMetadataJson("https://api.example.com", "test-key", { name: "piece" });
 
@@ -49,7 +49,7 @@ test("uploadImage throws with the backend error message on failure", async () =>
   await writeFile(filePath, "<svg></svg>", "utf8");
 
   globalThis.fetch = (async () =>
-    new Response(JSON.stringify({ error: "Payload too large" }), { status: 413 })) as typeof fetch;
+    new Response(JSON.stringify({ error: "Payload too large" }), { status: 413 })) as unknown as typeof fetch;
 
   await expect(uploadImage("https://api.example.com", "test-key", filePath)).rejects.toThrow(
     "Payload too large"
