@@ -43,7 +43,7 @@ export function newRun(runId: string, salt: string, count: number): RunState {
     pieces.push({
       index,
       seed: "",
-      imagePath: join(runDir(runId), "pieces", `${index}.svg`),
+      imagePath: join(runDir(runId), "pieces", `${index}.gif`),
       uploaded: false,
       minted: false,
     });

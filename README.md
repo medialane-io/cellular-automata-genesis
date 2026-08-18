@@ -1,8 +1,9 @@
 # Cellular Automata Genesis
 
-Deterministic cellular-automata art, generated and minted as a `mip-erc721`
-collection through the public Medialane API (`@medialane/sdk`), paid for
-with x402-funded credits.
+Deterministic, animated cellular-automata art — each piece is a GIF of the
+full evolution, not just the final frame — generated and minted as a
+`mip-erc721` collection through the public Medialane API (`@medialane/sdk`),
+paid for with x402-funded credits.
 
 ## Setup
 

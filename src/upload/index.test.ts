@@ -10,7 +10,7 @@ afterEach(() => {
 
 test("uploadImage posts multipart form data with the api key header", async () => {
   await mkdir("out/test-upload", { recursive: true });
-  const filePath = join("out/test-upload", "piece.svg");
+  const filePath = join("out/test-upload", "piece.gif");
   await writeFile(filePath, "<svg></svg>", "utf8");
 
   let capturedUrl = "";
@@ -45,7 +45,7 @@ test("uploadMetadataJson posts the metadata object as JSON", async () => {
 
 test("uploadImage throws with the backend error message on failure", async () => {
   await mkdir("out/test-upload-fail", { recursive: true });
-  const filePath = join("out/test-upload-fail", "piece.svg");
+  const filePath = join("out/test-upload-fail", "piece.gif");
   await writeFile(filePath, "<svg></svg>", "utf8");
 
   globalThis.fetch = (async () =>
