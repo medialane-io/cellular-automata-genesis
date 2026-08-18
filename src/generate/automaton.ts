@@ -47,3 +47,11 @@ export function runAutomaton(seed: bigint): boolean[][] {
   for (let i = 0; i < ITERATIONS; i++) grid = step(grid);
   return grid;
 }
+
+/** All ITERATIONS + 1 grids (initial state through the final frame), for previewing the evolution. */
+export function runAutomatonFrames(seed: bigint): boolean[][][] {
+  const rng = createPrng(seed);
+  const frames: boolean[][][] = [initialGrid(rng)];
+  for (let i = 0; i < ITERATIONS; i++) frames.push(step(frames[frames.length - 1]));
+  return frames;
+}
